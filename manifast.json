@@ -3,12 +3,12 @@
     "name": "TsunodaSystem",
     "short_name": "Tsunoda",
     "icons": [{
-        "src": "https://tsunodanihongo.github.io/tsunoda/tsunoda.png",
+        "src": "tsunoda.png",
         "sizes": "192x192",
         "type": "image/png"
     },
     {
-        "src": "https://tsunodanihongo.github.io/tsunoda/tsunoda.png",
+        "src": "tsunoda.png",
         "sizes": "512x512",
         "type": "image/png"
     }],
