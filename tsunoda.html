@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <title>Tsunoda &ndash; System</title>
-    <link rel="icon" type="image/png" href="/tsunoda.png">
+    <link rel="icon" type="image/png" href="/tsunoda/tsunoda.png">
 
     
 
@@ -18,9 +18,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Tsunoda PWA">
-    <link rel="apple-touch-icon" href="/tsunoda.png">
+    <link rel="apple-touch-icon" href="/tsunoda/tsunoda.png">
 
-    <link rel="manifest" href="/manifast.json">
+    <link rel="manifest" href="/tsunoda/manifast.json">
   
   </head>
   <body>
@@ -67,7 +67,7 @@
         // CODELAB: Register service worker.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('/tsunoda/service-worker.js')
         .then((reg) => {
           console.log('Service worker registered.', reg);
         });
