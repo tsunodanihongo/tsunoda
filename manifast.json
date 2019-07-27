@@ -1,0 +1,13 @@
+{
+　"short_name": "Tsunoda",
+　"name": "TsunodaSystem",
+　"icons": [{
+　　"src":"https://tsunodanihongo.github.io/tsunoda/tsunoda.png",
+　　"sizes": "192×192",
+　　"type": "image/png"
+　　}],
+　"start_url": "https://script.google.com/macros/s/AKfycbyi-QxLDkymnTcvSSCEbQtHT3syPLLHpiybRGyw0fWH/exec",
+　"background_color": "#000",
+　"theme_color": "#536878",
+　"display": "standalone"
+}
