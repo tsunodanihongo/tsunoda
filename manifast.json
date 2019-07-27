@@ -1,13 +1,20 @@
+
 {
-　"short_name": "Tsunoda",
-　"name": "TsunodaSystem",
-　"icons": [{
-　　"src":"https://tsunodanihongo.github.io/tsunoda/tsunoda.png",
-　　"sizes": "192×192",
-　　"type": "image/png"
-　　}],
-　"start_url": "https://script.google.com/macros/s/AKfycbyi-QxLDkymnTcvSSCEbQtHT3syPLLHpiybRGyw0fWH/exec",
-　"background_color": "#000",
-　"theme_color": "#536878",
-　"display": "standalone"
+    "name": "TsunodaSystem",
+    "short_name": "Tsunoda",
+    "icons": [{
+        "src": "https://tsunodanihongo.github.io/tsunoda/tsunoda.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    },
+    {
+        "src": "https://tsunodanihongo.github.io/tsunoda/tsunoda.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }],
+    "start_url": "https://tsunodanihongo.github.io/tsunoda/tsunoda.html",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "background_color": "#FAFAFA",
+    "theme_color": "#6387F5"
 }
