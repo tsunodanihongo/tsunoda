@@ -2,12 +2,25 @@
   <head>
     <meta charset="utf-8">
     <title>Tsunoda &ndash; System</title>
-    <link rel="icon" type="image/png" href="tsunoda.png">
+    <link rel="icon" type="image/png" href="/tsunoda.png">
+
+    
+
+
+
     <link rel="stylesheet" href="https://schmich.github.io/instascan/style.css">
-    <link rel="manifest" href="manifast.json">
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Tsunoda PWA">
+    <link rel="apple-touch-icon" href="/tsunoda.png">
+
+    <link rel="manifest" href="/manifast.json">
   
   </head>
   <body>
@@ -50,14 +63,16 @@
     <script type="text/javascript" src="https://schmich.github.io/instascan/app.js"></script>
     
     <script>
-        if('serviceWorker' in navigator){
-          console.log("register?");
-          navigator.serviceWorker.register('service-worker.js').then(function(reg{
-            console.log("it did.");
-          }).catch(function(err){
-            console.log("it didn't.");
-          });
-        }
+
+        // CODELAB: Register service worker.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then((reg) => {
+          console.log('Service worker registered.', reg);
+        });
+  });
+}
     </script>
   
   
