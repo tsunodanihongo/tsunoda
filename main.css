@@ -1,0 +1,83 @@
+<style type="text/css">
+body, html {
+  background-image: url(/tsunoda/tsunoda.png);
+  background: #A3C0D3;
+  text-align:center;
+  color: #283C82;
+  padding: 0;
+  margin: 0;
+  font-family: 'Helvetica Neue', 'Calibri', Arial, sans-serif, '微軟正黑體';
+  height: 100%;
+}
+
+h1 a {
+  color: #283C82;
+  font-weight: 500;
+  font-family: 'Helvetica Neue', 'Calibri', Arial, sans-serif, '微軟正黑體';
+}
+
+
+#app {
+  background: #263238;
+  display: flow;
+  align-items: stretch;
+  justify-content: stretch;
+  height: 100%;
+}
+
+
+
+.preview-container {
+    
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sidebar {
+  background: #eceff1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+}
+.sidebar h2 {
+  font-weight: normal;
+  font-size: 1.0rem;
+  background: #514c48;
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+}
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.sidebar li {
+  line-height: 175%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-wrap: none;
+  text-overflow: ellipsis;
+}
+.scans li {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+.scans-enter-active {
+  transition: background 3s;
+}
+.scans-enter {
+  background: yellow;
+}
+.empty {
+  font-style: italic, '微軟正黑體';
+}
+
+
+</style>
