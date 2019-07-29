@@ -19,12 +19,13 @@ h1 a {
 
 
 #app {
-  background: #263238;
+  background: #FFF8DB;
   display: flow;
   align-items: stretch;
   justify-content: stretch;
   height: 100%;
 }
+
 
 
 
