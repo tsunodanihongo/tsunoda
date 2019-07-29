@@ -13,8 +13,8 @@
         "type": "image/png"
     }],
     "start_url": "https://tsunodanihongo.github.io/tsunoda/tsunoda.html",
-    "display": "minimal-ui",
-    "orientation": "portrait",
+    "display": "browser",
+    "orientation": "landscape",
     "background_color": "#FAFAFA",
     "theme_color": "#6387F5"
 }
