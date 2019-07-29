@@ -1,5 +1,6 @@
 
 body, html {
+  -webkit-text-size-adjust: 100%;
   background: #A3C0D3;
   text-align:center;
   color: #283C82;
