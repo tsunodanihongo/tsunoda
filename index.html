@@ -31,8 +31,8 @@ limitations under the License.
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = '260561285296-fs8snc9ugdgda6n2662t3j28tq3d8ftn.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyC-MLDW3fef19Ajv8AfsMWciOL8kywrZc4';
+      var CLIENT_ID = '688649811741-j3r9kroghj5o74or8ssa2sl221pstv0c.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyBEnn8e7CVwtQOhMp31Iwa3CGI_d22be1s';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
@@ -121,7 +121,7 @@ limitations under the License.
        */
       function listMajors() {
         gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+          spreadsheetId: '1omSs9CKifHyJeuzmwyIM2k9t_xj5otxizmeEin97e4g',
           range: 'Class Data!A2:E',
         }).then(function(response) {
           var range = response.result;
