@@ -27,8 +27,11 @@ limitations under the License.
 
     <script type="text/javascript">
 
+
+      var READ_QUICK_SHOW_DATA = "https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec";
+
       var fileId = "1omSs9CKifHyJeuzmwyIM2k9t_xj5otxizmeEin97e4g";
-      
+
       $(function(){
         var $show = $('#show');
         var a = {
@@ -36,9 +39,9 @@ limitations under the License.
         };
         $.get(READ_QUICK_SHOW_DATA, a, function(data){
           var d = data.split(',');  //把傳出來的字串分割成陣列
-          var arr = [];  
+          var arr = [];
           for(var i=0; i<(a.endRow-a.row+1); i++){
-            arr[i] = d.splice(0, (a.endCol-a.col+1)); 
+            arr[i] = d.splice(0, (a.endCol-a.col+1));
             $show.append(arr[i]+'<br/>');
           }
 
