@@ -17,8 +17,10 @@ limitations under the License.
 <!DOCTYPE html>
 <html>
   <head>
+
     <title>Google Sheets API Quickstart</title>
     <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
   <body>
     <p>Google Sheets API Quickstart</p>
@@ -27,21 +29,21 @@ limitations under the License.
 
     <script type="text/javascript">
 
+                                //https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec
+      var READ_QUICK_SHOW_DATA = "https://script.googleusercontent.com/macros/echo?user_content_key=j_qZ5PqoDVWQNzXGseSchSNzhELEYtNP9xzDpeEwHZ3LsxK4CIgX5A4L1hbGKNvx3ByMXyqEahB2g4wy0WUjefDe1fbKH4J5m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnFBVVRQhwRh3qCEk_F6Gjd1KXcbL5xWrOLFEjpVgzOMREPin6Jth0oLacrY_wOGqBA&lib=Ms2RNz0jkUCulp0O-Kx2rPrLH4UjpOLQo";
 
-      var READ_QUICK_SHOW_DATA = "https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec";
-
-      var fileId = "1omSs9CKifHyJeuzmwyIM2k9t_xj5otxizmeEin97e4g";
+      var file_Id = "1omSs9CKifHyJeuzmwyIM2k9t_xj5otxizmeEin97e4g";
 
       $(function(){
         var $show = $('#show');
+        $show.append('test<br/>');
         var a = {
-          'fileId' : fileId;
+          fileId : file_Id;
         };
         $.get(READ_QUICK_SHOW_DATA, a, function(data){
           var d = data.split(',');  //把傳出來的字串分割成陣列
           var arr = [];
-          for(var i=0; i<(a.endRow-a.row+1); i++){
-            arr[i] = d.splice(0, (a.endCol-a.col+1));
+          for(var i = 0; i < d.length; i++){
             $show.append(arr[i]+'<br/>');
           }
 
