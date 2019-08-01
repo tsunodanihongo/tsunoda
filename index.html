@@ -27,7 +27,7 @@ limitations under the License.
 
     <div id="show">數值顯示在這邊</div>
 
-    <script type="text/javascript" src="tsunoda/index.js"></script>
+    <script type="text/javascript" src="/tsunoda/index.js"></script>
 
 
     <script type="text/javascript">
@@ -41,7 +41,7 @@ limitations under the License.
         var $show = document.getElementById('show');
         $show.append('test<br/>');
         var a = {
-          fileId : file_Id;
+          'fileId' : file_Id;
         };
         $.get(READ_QUICK_SHOW_DATA, a, function(data){
           $show.append(data+'   sssss<br/>');
