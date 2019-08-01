@@ -27,6 +27,9 @@ limitations under the License.
 
     <div id="show">數值顯示在這邊</div>
 
+    <script type="text/javascript" src="tsunoda/index.js"></script>
+
+
     <script type="text/javascript">
 
                                 //https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec
@@ -34,21 +37,21 @@ limitations under the License.
 
       var file_Id = "1omSs9CKifHyJeuzmwyIM2k9t_xj5otxizmeEin97e4g";
 
-      $(function(){
-        var $show = $('#show');
+
+        var $show = document.getElementById('show');
         $show.append('test<br/>');
         var a = {
           fileId : file_Id;
         };
         $.get(READ_QUICK_SHOW_DATA, a, function(data){
+          $show.append(data+'   sssss<br/>');
           var d = data.split(',');  //把傳出來的字串分割成陣列
-          var arr = [];
           for(var i = 0; i < d.length; i++){
-            $show.append(arr[i]+'<br/>');
+            $show.append(d[i]+'<br/>');
           }
 
         });
-      });
+
 
     </script>
   </body>
