@@ -1,19 +1,4 @@
-<!--
-Copyright 2018 Google LLC
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    https://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-<!-- [START sheets_quickstart] -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,7 +18,7 @@ limitations under the License.
     <script type="text/javascript">
 
                                 //https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec
-      var READ_QUICK_SHOW_DATA = "https://script.googleusercontent.com/macros/echo?user_content_key=j_qZ5PqoDVWQNzXGseSchSNzhELEYtNP9xzDpeEwHZ3LsxK4CIgX5A4L1hbGKNvx3ByMXyqEahB2g4wy0WUjefDe1fbKH4J5m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnFBVVRQhwRh3qCEk_F6Gjd1KXcbL5xWrOLFEjpVgzOMREPin6Jth0oLacrY_wOGqBA&lib=Ms2RNz0jkUCulp0O-Kx2rPrLH4UjpOLQo";
+      var READ_QUICK_SHOW_DATA = "https://script.google.com/macros/s/AKfycbyh8xkrqPkiE2M4rqSLaOQnGzuBhlIM-2GwcB5tFBs/exec";
 
       var file_Id = "1omSs9CKifHyJeuzmwyIM2k9t_xj5otxizmeEin97e4g";
 
@@ -41,10 +26,11 @@ limitations under the License.
         var $show = document.getElementById('show');
         $show.append('test<br/>');
         var a = {
-          'fileId' : file_Id
+          'fileId' : file_Id,
+          'method' : "list"
         };
         $.get(READ_QUICK_SHOW_DATA, a, function(data){
-          $show.append(data+'   sssss<br/>');
+          $show.append(data + '<br/>   sssss<br/>');
           var d = data.split(',');  //把傳出來的字串分割成陣列
           for(var i = 0; i < d.length; i++){
             $show.append(d[i]+'<br/>');
