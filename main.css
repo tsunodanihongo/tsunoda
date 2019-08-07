@@ -1,16 +1,13 @@
 <style type="text/css">
 body, html {
 -webkit-text-size-adjust: 100%;
-  background: #A3C0D3;
   text-align:center;
-  margin-top: 1.0rem;
   color: #283C82;
   font-family: 'Helvetica Neue', 'Calibri', Arial, sans-serif, '微軟正黑體';
   height: 100%;
 }
 
 #container h1 a {
-  background: #A3C0D3;
   display: flow;
   text-align:center;
   width: 100%;
@@ -23,6 +20,7 @@ body, html {
 
 
 #app {
+  margin-top: 1.0rem;
   background: #FFF8DB;
   display: flow;
   align-items: center;
@@ -53,7 +51,7 @@ body, html {
   background: #514c48;
   color: #fff;
   padding: 20px;
-  font-size: 3.0rem;
+  font-size: 2.5rem;
 }
 .student_info_show li {
   background: #eceff1;
@@ -72,6 +70,7 @@ body, html {
   box-sizing: border-box;
   margin: auto;
   vertical-align:top;
+  font-size: 2.5rem;
 }
 
 
