@@ -22,86 +22,88 @@
   </head>
   <body>
 
-     <div id="app">
+    <div id="container">
+      <h1> <a>角田日語 刷卡系統</a> </h1>
+    </div>
 
-       <div id="container">
-         <h1> <a>角田日語 刷卡系統</a> </h1>
-       </div>
-
-
-        <div class="preview-container">
-          <video id="preview"></video>
-        </div>
-
-        <div class="student_info">
-          <ul><h2> 學號 </h2><li id="student_id"></li></ul><ul><h2> 姓名 </h2><li id="student_name"></li></ul><ul><h2> 日文名 </h2><li id="student_japan_name"></li></ul><ul><h2> 狀態 </h2><li id="student_status"></li></ul>
-        </div>
-
-     </div>
-
-      <script type="text/javascript">
-      let scanner = new Instascan.Scanner({
-          video: document.getElementById('preview')
-      });
-      // 開啟一個新的掃描
-      // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
-      // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
-
-      scanner.addListener('scan', function(content) {
-          console.log(content);
-          var student_qr = content.split(";");
-
-          getInfo(student_qr[2]);
-      });
-      //開始偵聽掃描事件，若有偵聽到印出內容。
+    <div id="app">
 
 
 
-      Instascan.Camera.getCameras().then(function(cameras) {
-      //取得設備的相機數目
-          if (cameras.length > 0) {
-            ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
-              scanner.start(cameras[0]);
-          } else {
-            //若設備沒有相機數量則顯示"No cameras found";
-            //這裡自行判斷要寫什麼
-              console.error('No cameras found.');
-          }
-      }).catch(function(e) {
-          console.error(e);
-      });
+
+      <div class="preview-container">
+        <video id="preview"></video>
+      </div>
+
+      <div class="student_info">
+        <ul><h2> 學號 </h2><li id="student_id"></li></ul><ul><h2> 姓名 </h2><li id="student_name"></li></ul><ul><h2> 日文名 </h2><li id="student_japan_name"></li></ul><ul><h2> 狀態 </h2><li id="student_status"></li></ul>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+    let scanner = new Instascan.Scanner({
+        video: document.getElementById('preview')
+    });
+    // 開啟一個新的掃描
+    // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
+    // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
+
+    scanner.addListener('scan', function(content) {
+        console.log(content);
+        var student_qr = content.split(";");
+
+        getInfo(student_qr[2]);
+    });
+    //開始偵聽掃描事件，若有偵聽到印出內容。
 
 
 
-      function getInfo(index){
-          jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
-                  "index": index,
-                  "checkEmail": ""
-          },function (data) {
-              console.log(data);
-              var info_split = data.split(",");
-              document.getElementById("student_id").innerHTML = info_split[1];
-              document.getElementById("student_name").innerHTML = info_split[2];
-              document.getElementById("student_japan_name").innerHTML = info_split[3];
-              document.getElementById("student_status").innerHTML = info_split[4];
-
-          });
-      }
-
-      </script>
-
-      <script>
-
-          // CODELAB: Register service worker.
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/tsunoda/service-worker.js')
-                .then((reg) => {
-                  console.log('Service worker registered.', reg);
-                });
-          });
+    Instascan.Camera.getCameras().then(function(cameras) {
+    //取得設備的相機數目
+        if (cameras.length > 0) {
+          ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
+            scanner.start(cameras[0]);
+        } else {
+          //若設備沒有相機數量則顯示"No cameras found";
+          //這裡自行判斷要寫什麼
+            console.error('No cameras found.');
         }
-      </script>
+    }).catch(function(e) {
+        console.error(e);
+    });
+
+
+
+    function getInfo(index){
+        jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
+                "index": index,
+                "checkEmail": ""
+        },function (data) {
+            console.log(data);
+            var info_split = data.split(",");
+            document.getElementById("student_id").innerHTML = info_split[1];
+            document.getElementById("student_name").innerHTML = info_split[2];
+            document.getElementById("student_japan_name").innerHTML = info_split[3];
+            document.getElementById("student_status").innerHTML = info_split[4];
+
+        });
+    }
+
+    </script>
+
+    <script>
+
+        // CODELAB: Register service worker.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/tsunoda/service-worker.js')
+              .then((reg) => {
+                console.log('Service worker registered.', reg);
+              });
+        });
+      }
+    </script>
 
 
   </body>

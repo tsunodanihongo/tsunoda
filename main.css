@@ -8,8 +8,8 @@ body, html {
 }
 
 #container h1 a {
+  background-color: #A3C0D3;
   display:inline-block;
-  margin:30px auto 30px auto;
   text-align:center;
   width: 100%;
   color: #283C82;
