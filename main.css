@@ -1,7 +1,6 @@
 <style type="text/css">
 body, html {
 -webkit-text-size-adjust: 100%;
-  background-image: url("/tsunoda/tsunoda.png");
   background: #A3C0D3;
   text-align:center;
   margin-top: 1.0rem;
@@ -11,10 +10,11 @@ body, html {
 }
 
 h1 a {
+  background: #A3C0D3;
   color: #283C82;
   font-weight: 1000;
-  font-size: 3.0rem;
-
+  font-size: 4.0rem;
+  text-align:center;
   font-family: 'Helvetica Neue', 'Calibri', Arial, sans-serif, '微軟正黑體';
 }
 
@@ -22,9 +22,10 @@ h1 a {
 #app {
   background: #FFF8DB;
   display: flow;
-  align-items: stretch;
-  justify-content: stretch;
+  align-items: center;
+  justify-content: center;
   height: 100%;
+  text-align: center;
 }
 
 .preview-container {
@@ -43,10 +44,11 @@ h1 a {
   flex-direction: row;
   overflow: auto;
   font-size: 2.0rem;
+  text-align:center;
 }
 .student_info h2 {
   font-weight: normal;
-  font-size: 2.0rem;
+  font-size: 3.0rem;
   background: #514c48;
   color: #fff;
   padding: 20px;
@@ -55,7 +57,7 @@ h1 a {
   background: #eceff1;
   line-height: 275%;
   font-weight: normal;
-  font-size: 5.0rem;
+  font-size: 3.0rem;
   white-space: nowrap;
   overflow: auto;
 
