@@ -61,12 +61,34 @@ body, html {
   overflow: auto;
   font-size: 2.5rem;
 }
-.student_info ul{
+.student_info ul1{
+  color: #283C82;
+  padding: 0;
+  list-style-type: none;
+  display: inline-block;
+  width: 20%;
+  box-sizing: border-box;
+  margin: auto;
+  vertical-align:top;
+  font-size: 2.5rem;
+}
+.student_info ul2{
   color: #283C82;
   padding: 0;
   list-style-type: none;
   display: inline-block;
   width: 25%;
+  box-sizing: border-box;
+  margin: auto;
+  vertical-align:top;
+  font-size: 2.5rem;
+}
+.student_info ul3{
+  color: #283C82;
+  padding: 0;
+  list-style-type: none;
+  display: inline-block;
+  width: 30%;
   box-sizing: border-box;
   margin: auto;
   vertical-align:top;
