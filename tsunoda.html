@@ -21,14 +21,14 @@
 
   </head>
   <body>
+    <audio id="audio_play" src="/tsunoda/signin.mp3" hidden="true"></audio>
 
-    <div id="container">
-      <h1> <a>角田日語 刷卡系統</a> </h1>
-    </div>
 
     <div id="app">
 
-
+      <div id="container">
+        <h1> <a>角田日語 刷卡系統</a> </h1>
+      </div>
 
 
       <div class="preview-container">
@@ -80,7 +80,7 @@
                 "index": index,
                 "checkEmail": ""
         },function (data) {
-            console.log(data);
+            playSound("/tsunoda/signin.mp3");
             var info_split = data.split(",");
             document.getElementById("student_id").innerHTML = info_split[1];
             document.getElementById("student_name").innerHTML = info_split[2];
@@ -88,6 +88,11 @@
             document.getElementById("student_status").innerHTML = info_split[4];
 
         });
+    }
+
+    function playSound(src) {
+      var auto = document.getElementById('audio_play');
+      auto.attr("src",src);
     }
 
     </script>
