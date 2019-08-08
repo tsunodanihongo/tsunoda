@@ -21,8 +21,10 @@
 
   </head>
   <body>
-    <audio id="audio_play" src="/tsunoda/signin.mp3" hidden="true"></audio>
 
+    <audio id="bgMusic">
+      <source src="/tsunoda/signin.mp3" type="audio/mp3" >
+    </audio>
 
     <div id="app">
 
@@ -32,7 +34,7 @@
 
 
       <div class="preview-container">
-        <video id="preview"></video>
+        <video id="preview" controls="controls"></video>
       </div>
 
       <div class="student_info">
@@ -52,9 +54,16 @@
     scanner.addListener('scan', function(content) {
         console.log(content);
         var student_qr = content.split(";");
-
-        getInfo(student_qr[2]);
+        pauseVid();
+        getInfo(student_qr);
     });
+    function play()
+    { document.getElementById('preview').play(); }
+    function pauseVid()
+    {
+      document.getElementById('preview').pause();
+      window.setTimeout(play, 2500);
+    }
     //開始偵聽掃描事件，若有偵聽到印出內容。
 
 
@@ -75,24 +84,72 @@
 
 
 
-    function getInfo(index){
-        jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
-                "index": index,
-                "checkEmail": ""
-        },function (data) {
-            playSound("/tsunoda/signin.mp3");
-            var info_split = data.split(",");
-            document.getElementById("student_id").innerHTML = info_split[1];
-            document.getElementById("student_name").innerHTML = info_split[2];
-            document.getElementById("student_japan_name").innerHTML = info_split[3];
-            document.getElementById("student_status").innerHTML = info_split[4];
+    function getInfo(student_qr){
+        var dt = new Date();
+        var year = dt.getFullYear();
+        var month = dt.getMonth()+1;
+        var day = dt.getDate();
 
+        jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
+                "checkEmail": "",
+                "index": student_qr[2],
+                "sheetId": student_qr[1],
+                "year": year,
+                "month": month,
+                "day": day,
+                "date": dt.yyyymmdd(),
+                "time": dt.HHMMss()
+        },function (data) {
+            console.log(data);
+            if(!data.includes(",")){
+              if(data.includes("hadswiped")){
+                BootstrapDialog.alert("已刷卡");
+                playSound("/tsunoda/pika.mp3");
+              }else{
+                BootstrapDialog.alert(data);
+              }
+
+            }else{
+              var info_split = data.split(",");
+              document.getElementById("student_id").innerHTML = info_split[1];
+              document.getElementById("student_name").innerHTML = info_split[2];
+              document.getElementById("student_japan_name").innerHTML = info_split[3];
+              document.getElementById("student_status").innerHTML = info_split[5];
+              if(student_qr[2] == "14"){
+                playSound("/tsunoda/pika.mp3");
+              }else{
+                playSound("/tsunoda/signin.mp3");
+              }
+            }
         });
     }
 
+    Date.prototype.yyyymmdd = function() {
+      var mm = this.getMonth() + 1; // getMonth() is zero-based
+      var dd = this.getDate();
+
+      return [this.getFullYear(),
+              (mm>9 ? '' : '0') + mm,
+              (dd>9 ? '' : '0') + dd
+            ].join('-');
+    };
+
+    Date.prototype.HHMMss = function() {
+      var HH = this.getHours();
+      var MM = this.getMinutes();
+      var ss = this.getSeconds();
+
+      return [(HH>9 ? '' : '0') + HH,
+              (MM>9 ? '' : '0') + MM,
+              (ss>9 ? '' : '0') + ss
+            ].join('');
+    };
+
+
     function playSound(src) {
-      var auto = document.getElementById('audio_play');
-      auto.attr("src",src);
+      var audio = document.createElement("audio");
+      audio.src = src;
+      audio.play();
     }
 
     </script>
