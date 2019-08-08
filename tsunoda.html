@@ -23,7 +23,7 @@
   <body>
 
     <audio id="bgMusic">
-      <source src="/tsunoda/signin.mp3" type="audio/mp3" >
+      <source src="/tsunoda/signin.mp3" type="audio/mpeg" >
     </audio>
 
     <div id="app">
@@ -57,13 +57,10 @@
         pauseVid();
         getInfo(student_qr);
     });
-    function play()
+    function playVid()
     { document.getElementById('preview').play(); }
     function pauseVid()
-    {
-      document.getElementById('preview').pause();
-      window.setTimeout(play, 2500);
-    }
+    {document.getElementById('preview').pause();}
     //開始偵聽掃描事件，若有偵聽到印出內容。
 
 
@@ -110,6 +107,7 @@
               }
 
             }else{
+              playVid();
               var info_split = data.split(",");
               document.getElementById("student_id").innerHTML = info_split[1];
               document.getElementById("student_name").innerHTML = info_split[2];
