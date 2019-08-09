@@ -23,7 +23,7 @@
   <body>
 
     <audio id="bgMusic">
-      <source src="/tsunoda/signin.mp3" type="audio/mpeg" >
+      <source id = audio src="/tsunoda/signin.mp3" type="audio/mpeg" >
     </audio>
 
     <div id="app">
@@ -145,9 +145,10 @@
 
 
     function playSound(src) {
-      var audio = document.createElement("audio");
+      var audio = document.getElementById('audio');
       audio.src = src;
       audio.play();
+
     }
 
     </script>
