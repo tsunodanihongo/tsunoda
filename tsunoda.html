@@ -22,9 +22,8 @@
   </head>
   <body>
 
-    <audio id="bgMusic">
-      <source id = audio src="/tsunoda/signin.mp3" type="audio/mpeg" >
-    </audio>
+    <audio id="bgMusic" type="audio/mpeg"></audio>
+
 
     <div id="app">
 
@@ -38,7 +37,7 @@
       </div>
 
       <div class="student_info">
-        <ul><h2> 學號 </h2><li id="student_id"></li></ul><ul><h2> 姓名 </h2><li id="student_name"></li></ul><ul><h2> 日文名 </h2><li id="student_japan_name"></li></ul><ul><h2> 狀態 </h2><li id="student_status"></li></ul>
+        <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
       </div>
 
     </div>
@@ -145,7 +144,7 @@
 
 
     function playSound(src) {
-      var audio = document.getElementById('audio');
+      var audio = document.getElementById('bgMusic');
       audio.src = src;
       audio.play();
 
