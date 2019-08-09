@@ -161,8 +161,11 @@
       //audio..setAttribute('type', 'audio/mpeg');
       audio.play();
     }
-
     function showPopover(meg) {
+      alert(meg);
+    }
+
+    function showPopover1(meg) {
       $("#show_alert").attr("data-original-title", meg);
       $('[data-toggle="tooltip"]').tooltip();
       $("#show_alert").tooltip('show');
