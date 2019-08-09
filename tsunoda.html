@@ -22,7 +22,7 @@
   </head>
   <body>
 
-    <audio id="bgMusic" type="audio/mpeg"></audio>
+    <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.mp3"></audio>
 
 
     <div id="app">
@@ -111,12 +111,22 @@
               document.getElementById("student_id").innerHTML = info_split[1];
               document.getElementById("student_name").innerHTML = info_split[2];
               document.getElementById("student_japan_name").innerHTML = info_split[3];
-              document.getElementById("student_status").innerHTML = info_split[5];
+               document.getElementById("student_status").innerHTML = info_split[5];
+
               if(student_qr[2] == "14"){
-                playSound("/tsunoda/pika.mp3");
+                playSound("https://tsunodanihongo.github.io/tsunoda/pika.mp3");
               }else{
-                playSound("/tsunoda/signin.mp3");
+                playSound("https://tsunodanihongo.github.io/tsunoda/signin.mp3");
               }
+
+              if(info_split[5] == "到期線上待繳"){ document.getElementById("student_status").style.backgroundColor ='#FF0000';
+              }else if(info_split[5] == "延課中"){
+               document.getElementById("student_status").style.backgroundColor ='#FFFF00';
+              }else{
+                document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
+              }
+
+
             }
         });
     }
@@ -145,9 +155,9 @@
 
     function playSound(src) {
       var audio = document.getElementById('bgMusic');
-      audio.src = src;
+      audio.setAttribute('src', src);
+      //audio..setAttribute('type', 'audio/mpeg');
       audio.play();
-
     }
 
     </script>
