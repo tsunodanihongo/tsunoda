@@ -96,17 +96,20 @@
                 "date": dt.yyyymmdd(),
                 "time": dt.HHMMss()
         },function (data) {
+            playVid();
             console.log(data);
+            //有錯誤
             if(!data.includes(",")){
+
               if(data.includes("hadswiped")){
-                BootstrapDialog.alert("已刷卡");
+                alert("已刷卡");
                 playSound("/tsunoda/pika.mp3");
               }else{
-                BootstrapDialog.alert(data);
+                alert(data);
               }
 
             }else{
-              playVid();
+
               var info_split = data.split(",");
               document.getElementById("student_id").innerHTML = info_split[1];
               document.getElementById("student_name").innerHTML = info_split[2];
@@ -152,10 +155,9 @@
             ].join('');
     };
 
-
+    var audio = document.getElementById('bgMusic');
     function playSound(src) {
-      var audio = document.getElementById('bgMusic');
-      audio.setAttribute('src', src);
+      //audio.setAttribute('src', src);
       //audio..setAttribute('type', 'audio/mpeg');
       audio.play();
     }
