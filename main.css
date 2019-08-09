@@ -100,5 +100,8 @@ body, html {
   font-size: 2.5rem;
   margin-bottom: 2.0rem;
 }
-
+.tooltip{
+    font-size: 3.0rem;
+    text-align:center;
+}
 </style>

@@ -36,7 +36,7 @@
         <video id="preview"></video>
       </div>
 
-      <div class="student_info">
+      <div class="student_info"  id="show_alert" data-toggle="tooltip" data-placement="top">
         <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
       </div>
 
@@ -102,10 +102,10 @@
             if(!data.includes(",")){
 
               if(data.includes("hadswiped")){
-                alert("已刷卡");
+                showPopover("已刷卡");
                 playSound("/tsunoda/pika.mp3");
               }else{
-                alert(data);
+                showPopover(data);
               }
 
             }else{
@@ -160,6 +160,21 @@
       //audio.setAttribute('src', src);
       //audio..setAttribute('type', 'audio/mpeg');
       audio.play();
+    }
+
+    function showPopover(meg) {
+      $("#show_alert").attr("data-original-title", meg);
+      $('[data-toggle="tooltip"]').tooltip();
+      $("#show_alert").tooltip('show');
+      $("#show_alert").focus();
+
+      //2秒后消失提示框
+      var id = setTimeout(
+          function () {
+              $("#show_alert").attr("data-original-title", "");
+              $("#show_alert").tooltip('hide');
+          }, 2000
+      );
     }
 
     </script>
