@@ -12,6 +12,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
+
+    <!-- set to ios desktop -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-title" content="Tsunoda PWA">
@@ -19,6 +21,11 @@
 
     <link rel="manifest" href="/tsunoda/manifast.json">
 
+
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="688649811741-qsf4neneila70g04mlroms3q340vij3i.apps.googleusercontent.com">
   </head>
   <body>
 
@@ -26,6 +33,8 @@
 
 
     <div id="app">
+
+      <div class="g-signin2 col-xs-10 float:left" data-onsuccess="onSignIn"></div>
 
       <div id="container">
         <h1> <a>角田日語 刷卡系統</a> </h1>
@@ -41,144 +50,165 @@
       </div>
 
     </div>
-
     <script type="text/javascript">
-    let scanner = new Instascan.Scanner({
-        video: document.getElementById('preview')
-    });
-    // 開啟一個新的掃描
-    // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
-    // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
+      let scanner = new Instascan.Scanner({
+          video: document.getElementById('preview')
+      });
+      // 開啟一個新的掃描
+      // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
+      // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
 
-    scanner.addListener('scan', function(content) {
-        console.log(content);
-        var student_qr = content.split(";");
-        pauseVid();
-        getInfo(student_qr);
-    });
-    function playVid()
-    { document.getElementById('preview').play(); }
-    function pauseVid()
-    {document.getElementById('preview').pause();}
-    //開始偵聽掃描事件，若有偵聽到印出內容。
-
-
-
-    Instascan.Camera.getCameras().then(function(cameras) {
-    //取得設備的相機數目
-        if (cameras.length > 0) {
-          ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
-            scanner.start(cameras[0]);
-        } else {
-          //若設備沒有相機數量則顯示"No cameras found";
-          //這裡自行判斷要寫什麼
-            console.error('No cameras found.');
-        }
-    }).catch(function(e) {
-        console.error(e);
-    });
+      scanner.addListener('scan', function(content) {
+          console.log(content);
+          var student_qr = content.split(";");
+          pauseVid();
+          getInfo(student_qr);
+      });
+      function playVid()
+      { document.getElementById('preview').play(); }
+      function pauseVid()
+      {document.getElementById('preview').pause();}
+      //開始偵聽掃描事件，若有偵聽到印出內容。
 
 
 
-    function getInfo(student_qr){
-        var dt = new Date();
-        var year = dt.getFullYear();
-        var month = dt.getMonth()+1;
-        var day = dt.getDate();
+      Instascan.Camera.getCameras().then(function(cameras) {
+      //取得設備的相機數目
+          if (cameras.length > 0) {
+            ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
+              scanner.start(cameras[0]);
+          } else {
+            //若設備沒有相機數量則顯示"No cameras found";
+            //這裡自行判斷要寫什麼
+              console.error('No cameras found.');
+          }
+      }).catch(function(e) {
+          console.error(e);
+      });
 
-        jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
-                "checkEmail": "",
-                "index": student_qr[2],
-                "sheetId": student_qr[1],
-                "year": year,
-                "month": month,
-                "day": day,
-                "date": dt.yyyymmdd(),
-                "time": dt.HHMMss()
-        },function (data) {
-            playVid();
-            console.log(data);
-            //有錯誤
-            if(!data.includes(",")){
 
-              if(data.includes("hadswiped")){
-                showPopover("已刷卡");
-                playSound("/tsunoda/pika.mp3");
+
+      function getInfo(student_qr){
+          var dt = new Date();
+          var year = dt.getFullYear();
+          var month = dt.getMonth()+1;
+          var day = dt.getDate();
+
+          jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
+                  "checkEmail": emailStr,
+                  "index": student_qr[2],
+                  "sheetId": student_qr[1],
+                  "year": year,
+                  "month": month,
+                  "day": day,
+                  "date": dt.yyyymmdd(),
+                  "time": dt.HHMMss()
+          },function (data) {
+              playVid();
+              console.log(data);
+              //有錯誤
+              if(!data.includes(",")){
+
+                if(data.includes("hadswiped")){
+                  showPopover("已刷卡");
+                  playSound("/tsunoda/pika.mp3");
+                }else{
+                  showPopover(data);
+                }
+
               }else{
-                showPopover(data);
+
+                var info_split = data.split(",");
+                document.getElementById("student_id").innerHTML = info_split[1];
+                document.getElementById("student_name").innerHTML = info_split[2];
+                document.getElementById("student_japan_name").innerHTML = info_split[3];
+                 document.getElementById("student_status").innerHTML = info_split[5];
+
+                if(student_qr[2] == "14"){
+                  playSound("https://tsunodanihongo.github.io/tsunoda/pika.mp3");
+                }else{
+                  playSound("https://tsunodanihongo.github.io/tsunoda/signin.mp3");
+                }
+
+                if(info_split[5] == "到期線上待繳"){
+                  document.getElementById("student_status").style.backgroundColor ='#FF0000';
+
+                }else if(info_split[5] == "延課中"){
+                 document.getElementById("student_status").style.backgroundColor ='#FFFF00';
+
+                }else{
+                  document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
+                }
+
+
               }
+          });
+      }
 
-            }else{
+      Date.prototype.yyyymmdd = function() {
+        var mm = this.getMonth() + 1; // getMonth() is zero-based
+        var dd = this.getDate();
 
-              var info_split = data.split(",");
-              document.getElementById("student_id").innerHTML = info_split[1];
-              document.getElementById("student_name").innerHTML = info_split[2];
-              document.getElementById("student_japan_name").innerHTML = info_split[3];
-               document.getElementById("student_status").innerHTML = info_split[5];
+        return [this.getFullYear(),
+                (mm>9 ? '' : '0') + mm,
+                (dd>9 ? '' : '0') + dd
+              ].join('-');
+      };
 
-              if(student_qr[2] == "14"){
-                playSound("https://tsunodanihongo.github.io/tsunoda/pika.mp3");
-              }else{
-                playSound("https://tsunodanihongo.github.io/tsunoda/signin.mp3");
-              }
+      Date.prototype.HHMMss = function() {
+        var HH = this.getHours();
+        var MM = this.getMinutes();
+        var ss = this.getSeconds();
 
-              if(info_split[5] == "到期線上待繳"){ document.getElementById("student_status").style.backgroundColor ='#FF0000';
-              }else if(info_split[5] == "延課中"){
-               document.getElementById("student_status").style.backgroundColor ='#FFFF00';
-              }else{
-                document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
-              }
+        return [(HH>9 ? '' : '0') + HH,
+                (MM>9 ? '' : '0') + MM,
+                (ss>9 ? '' : '0') + ss
+              ].join('');
+      };
 
+      var audio = document.getElementById('bgMusic');
+      function playSound(src) {
+        //audio.setAttribute('src', src);
+        //audio..setAttribute('type', 'audio/mpeg');
+        audio.play();
+      }
+      function showPopover(meg) {
+        alert(meg);
+      }
 
-            }
-        });
-    }
+      function showPopover1(meg) {
+        $("#show_alert").attr("data-original-title", meg);
+        $('[data-toggle="tooltip"]').tooltip();
+        $("#show_alert").tooltip('show');
+        $("#show_alert").focus();
 
-    Date.prototype.yyyymmdd = function() {
-      var mm = this.getMonth() + 1; // getMonth() is zero-based
-      var dd = this.getDate();
+        //2秒后消失提示框
+        var id = setTimeout(
+            function () {
+                $("#show_alert").attr("data-original-title", "");
+                $("#show_alert").tooltip('hide');
+            }, 2000
+        );
+      }
 
-      return [this.getFullYear(),
-              (mm>9 ? '' : '0') + mm,
-              (dd>9 ? '' : '0') + dd
-            ].join('-');
-    };
+      var emailStr;
+      function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+          console.log('Name: ' + profile.getName());
+          console.log('Image URL: ' + profile.getImageUrl());
+          console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+          emailStr = profile.getEmail()+","+profile.getName();
+      }
 
-    Date.prototype.HHMMss = function() {
-      var HH = this.getHours();
-      var MM = this.getMinutes();
-      var ss = this.getSeconds();
+      function signOut() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+              BootstrapDialog.alert('User signed out.');
+              console.log('User signed out.');
+          });
+      }
 
-      return [(HH>9 ? '' : '0') + HH,
-              (MM>9 ? '' : '0') + MM,
-              (ss>9 ? '' : '0') + ss
-            ].join('');
-    };
-
-    var audio = document.getElementById('bgMusic');
-    function playSound(src) {
-      //audio.setAttribute('src', src);
-      //audio..setAttribute('type', 'audio/mpeg');
-      audio.play();
-    }
-    function showPopover(meg) {
-      alert(meg);
-    }
-
-    function showPopover1(meg) {
-      $("#show_alert").attr("data-original-title", meg);
-      $('[data-toggle="tooltip"]').tooltip();
-      $("#show_alert").tooltip('show');
-      $("#show_alert").focus();
-
-      //2秒后消失提示框
-      var id = setTimeout(
-          function () {
-              $("#show_alert").attr("data-original-title", "");
-              $("#show_alert").tooltip('hide');
-          }, 2000
-      );
-    }
 
     </script>
 
