@@ -42,6 +42,7 @@
 
 
       <div class="preview-container">
+        <p><input type="button" value="play voice" onclick="playSound("https://tsunodanihongo.github.io/tsunoda/signin.mp3")" /></p>
         <video id="preview"></video>
       </div>
 
@@ -168,8 +169,7 @@
 
       var audio = document.getElementById('bgMusic');
       function playSound(src) {
-        //audio.setAttribute('src', src);
-        //audio..setAttribute('type', 'audio/mpeg');
+        audio.setAttribute('src', src);
         audio.play();
       }
       function showPopover(meg) {
@@ -194,11 +194,10 @@
       var emailStr;
       function onSignIn(googleUser) {
           var profile = googleUser.getBasicProfile();
-          //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
           console.log('Name: ' + profile.getName());
-          console.log('Image URL: ' + profile.getImageUrl());
+          console.log('ID: ' +  profile.getId());
           console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-          emailStr = profile.getEmail()+","+profile.getName();
+          emailStr = profile.getName() + "," + profile.getEmail();
       }
 
       function signOut() {
