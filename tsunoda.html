@@ -47,9 +47,7 @@
         <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
       </div>
 
-      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.m4a" loop="loop"></audio>
-      <input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:50px;font-size:16pt;" onclick="playAudio()" />
-
+      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.m4a" ></audio>
 
     </div>
     <script type="text/javascript">
@@ -169,13 +167,9 @@
               ].join('');
       };
 
-      var audio    = document.getElementById('bgMusic');
-      var audioKey = document.getElementById('playAudioKey');
-      function playAudio() {
-        audio.play();
-        audioKey.style.visibility = 'hidden';
-      }
+      var audio = document.getElementById('bgMusic');
       function playSound(src) {
+        audio.src = src;
         audio.play();
       }
       function showPopover(meg) {
