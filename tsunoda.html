@@ -47,7 +47,7 @@
         <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
       </div>
 
-      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.m4a" controls></audio>
+      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.m4a" loop="loop"></audio>
       <input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:50px;font-size:16pt;" onclick="playAudio()" />
 
 
@@ -63,6 +63,7 @@
       scanner.addListener('scan', function(content) {
           console.log(content);
           var student_qr = content.split(";");
+          audio.play();
           pauseVid();
           getInfo(student_qr);
       });
@@ -175,26 +176,10 @@
         audioKey.style.visibility = 'hidden';
       }
       function playSound(src) {
-        //audio.setAttribute('src', src);
         audio.play();
       }
       function showPopover(meg) {
         alert(meg);
-      }
-
-      function showPopover1(meg) {
-        $("#show_alert").attr("data-original-title", meg);
-        $('[data-toggle="tooltip"]').tooltip();
-        $("#show_alert").tooltip('show');
-        $("#show_alert").focus();
-
-        //2秒后消失提示框
-        var id = setTimeout(
-            function () {
-                $("#show_alert").attr("data-original-title", "");
-                $("#show_alert").tooltip('hide');
-            }, 2000
-        );
       }
 
       var emailStr;
