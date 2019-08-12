@@ -47,8 +47,8 @@
         <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
       </div>
 
-      <audio id="bgMusic" type="audio/ogg" src="https://tsunodanihongo.github.io/tsunoda/signin.ogg" controls></audio>
-      <p><input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:50px;font-size:16pt;" onclick="playAudio()" /></p>
+      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.mp3"></audio>
+      <input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:50px;font-size:16pt;" onclick="playAudio()" />
 
 
     </div>
@@ -127,9 +127,9 @@
                  document.getElementById("student_status").innerHTML = info_split[5];
 
                 if(student_qr[2] == "14"){
-                  playSound("https://tsunodanihongo.github.io/tsunoda/pika.ogg");
+                  playSound("https://tsunodanihongo.github.io/tsunoda/pika.mp3");
                 }else{
-                  playSound("https://tsunodanihongo.github.io/tsunoda/signin.ogg");
+                  playSound("https://tsunodanihongo.github.io/tsunoda/signin.mp3");
                 }
 
                 if(info_split[5] == "到期線上待繳"){
@@ -171,13 +171,11 @@
       var audio    = document.getElementById('bgMusic');
       var audioKey = document.getElementById('playAudioKey');
       function playAudio() {
-
         audio.play();
-        audio.pause();
         audioKey.style.visibility = 'hidden';
       }
       function playSound(src) {
-        audio.setAttribute('src', src);
+        //audio.setAttribute('src', src);
         audio.play();
       }
       function showPopover(meg) {
