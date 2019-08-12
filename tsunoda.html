@@ -34,10 +34,6 @@
 
       <div class="g-signin2 col-xs-10 float:left" data-onsuccess="onSignIn"></div>
 
-      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.mp3"></audio>
-      <p><input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:50px;font-size:16pt;" onclick="playAudio()" /></p>
-
-
       <div id="container">
         <h1> <a>角田日語 刷卡系統</a> </h1>
       </div>
@@ -50,6 +46,10 @@
       <div class="student_info"  id="show_alert" data-toggle="tooltip" data-placement="top">
         <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
       </div>
+
+      <audio id="bgMusic" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.mp3"></audio>
+      <p><input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:50px;font-size:16pt;" onclick="playAudio()" /></p>
+
 
     </div>
     <script type="text/javascript">
@@ -171,9 +171,10 @@
       var audio    = document.getElementById('bgMusic');
       var audioKey = document.getElementById('playAudioKey');
       function playAudio() {
-        audioKey.style.visibility = 'hidden';
-        audio.setAttribute('src', "https://tsunodanihongo.github.io/tsunoda/signin.mp3");
+
         audio.play();
+        audio.pause();
+        audioKey.style.visibility = 'hidden';
       }
       function playSound(src) {
         audio.setAttribute('src', src);
