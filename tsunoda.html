@@ -42,7 +42,7 @@
 
 
       <div class="preview-container">
-        <p><input type="button" value="play voice" onclick="playSound("https://tsunodanihongo.github.io/tsunoda/signin.mp3")" /></p>
+        <p><input id="playAudioKey" type="button" value="効果音を放送する" style="width:200px;height:100px;font-size:16pt;" onclick="playAudio()" /></p>
         <video id="preview"></video>
       </div>
 
@@ -167,7 +167,13 @@
               ].join('');
       };
 
-      var audio = document.getElementById('bgMusic');
+      var audio    = document.getElementById('bgMusic');
+      var audioKey = document.getElementById('playAudioKey');
+      function playAudio() {
+        audioKey.style.visibility = 'hidden';
+        audio.setAttribute('src', "https://tsunodanihongo.github.io/tsunoda/signin.mp3");
+        audio.play();
+      }
       function playSound(src) {
         audio.setAttribute('src', src);
         audio.play();
