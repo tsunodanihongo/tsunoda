@@ -49,8 +49,8 @@
 
       <audio id="BGM_signin" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/signin.m4a" ></audio>
       <audio id="BGM_warn" type="audio/mpeg" src="https://tsunodanihongo.github.io/tsunoda/pika.m4a" ></audio>
-      <input id="BGM_button_signin" type="button" value=サイン効果音を放送する" style="width:200px;height:20px;font-size:10pt;" onclick="document.BGM_signin.play();" />
-      <input id="BGM_button_warn" type="button" value=警告効果音を放送する" style="width:200px;height:20px;font-size:10pt;" onclick="document.BGM_signin.play();" />
+      <input id="BGM_button_signin" type="button" value="サイン効果音を放送する" style="width:200px;height:20px;font-size:10pt;" onclick="document.BGM_signin.play();" />
+      <input id="BGM_button_warn" type="button" value="警告効果音を放送する" style="width:200px;height:20px;font-size:10pt;" onclick="document.BGM_warn.play();" />
 
     </div>
     <script type="text/javascript">
@@ -110,11 +110,11 @@
               playVid();
               console.log(data);
               //有錯誤
-              if(!data.includes(",")){
+              if(!data.includes(",") || data.includes("已刷卡")){
 
                 if(data.includes("hadswiped")){
-                  showPopover("已刷卡");
-                  playSound("/tsunoda/pika.mp3");
+                  showPopover(data);
+                  playSound("/tsunoda/pika.m4a");
                 }else{
                   showPopover(data);
                 }
