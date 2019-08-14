@@ -112,7 +112,7 @@
               //有錯誤
               if(!data.includes(",") || data.includes("已刷卡")){
 
-                if(data.includes("hadswiped")){
+                if(data.includes("已刷卡")){
                   showPopover(data);
                   playSound("/tsunoda/pika.m4a");
                 }else{
@@ -127,11 +127,7 @@
                 document.getElementById("student_japan_name").innerHTML = info_split[3];
                 document.getElementById("student_status").innerHTML = info_split[5];
 
-                if(student_qr[2] == "14"){
-                  playSound("BGM_warn");
-                }else{
-                  playSound("BGM_signin");
-                }
+                playSound("BGM_signin");
 
                 if(info_split[5] == "到期線上待繳"){
                   document.getElementById("student_status").style.backgroundColor ='#FF0000';
@@ -172,8 +168,12 @@
       function playSound(src) {
         if(src == "BGM_warn"){
           document.getElementById("BGM_button_warn").click();
+          document.getElementById("BGM_warn").load();
+          document.getElementById("BGM_warn").play();
         }else{
           document.getElementById("BGM_button_signin").click();
+          document.getElementById("BGM_signin").load();
+          document.getElementById("BGM_signin").play();
         }
 
       }
