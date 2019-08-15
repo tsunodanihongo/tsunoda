@@ -94,6 +94,8 @@
           var year = dt.getFullYear();
           var month = dt.getMonth()+1;
           var day = dt.getDate();
+          var date = dt.yyyymmdd();
+          var time = dt.HHMMss();
 
           jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
                   "checkEmail": emailStr,
@@ -102,8 +104,8 @@
                   "year": year,
                   "month": month,
                   "day": day,
-                  "date": dt.yyyymmdd(),
-                  "time": dt.HHMMss()
+                  "date": date,
+                  "time": time
           },function (data) {
               playVid();
               console.log(data);
@@ -125,8 +127,6 @@
                 document.getElementById("student_japan_name").innerHTML = info_split[3];
                 document.getElementById("student_status").innerHTML = info_split[5];
 
-                playSound("BGM_signin");
-
                 if(info_split[5] == "到期線上待繳"){
                   document.getElementById("student_status").style.backgroundColor ='#FF0000';
 
@@ -137,6 +137,7 @@
                   document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
                 }
 
+                playSound("BGM_signin");
 
               }
           });
@@ -165,12 +166,8 @@
 
       function playSound(src) {
         if(src == "BGM_warn"){
-          document.getElementById("BGM_button_warn").click();
-          document.getElementById("BGM_warn").load();
           document.getElementById("BGM_warn").play();
         }else{
-          document.getElementById("BGM_button_signin").click();
-          document.getElementById("BGM_signin").load();
           document.getElementById("BGM_signin").play();
         }
 
