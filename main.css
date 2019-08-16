@@ -102,4 +102,17 @@ body, html {
     font-size: 3.0rem;
     text-align:center;
 }
+
+
+.btn.btn-warning {
+  background-color: #A3C0D3;
+  border-color: #A3C0D3;
+}
+
+.btn.btn-warning:focus,
+.btn.btn-warning:active,
+.btn.btn-warning:hover {
+  background-color: #283C82;
+  border-color: #10c6d3;
+}
 </style>
