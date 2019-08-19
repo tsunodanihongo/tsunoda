@@ -109,8 +109,14 @@ body, html {
   border-color: #A3C0D3;
 }
 
-.btn.btn-warning:focus,
-.btn.btn-warning:active,
+.btn.btn-warning:focus {
+  background-color: #283C82;
+  border-color: #10c6d3;
+},
+.btn.btn-warning:active {
+  background-color: #283C82;
+  border-color: #10c6d3;
+},
 .btn.btn-warning:hover {
   background-color: #283C82;
   border-color: #10c6d3;

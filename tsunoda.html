@@ -45,6 +45,13 @@
         </div>
       </div>
 
+      Click the text:<input type="date" id="test" />
+      <br>
+
+      <div id="myDialog" title="補簽到日期">
+        <input type="date" id="myDate" />
+      </div>
+      <input type='button' value='送出' data-action="submit"/>
 
       <div id="container">
         <h1> <a>角田日語 刷卡系統</a> </h1>
@@ -209,8 +216,18 @@
           });
       }
 
-      function resign(){
+      $("#test").datepicker();
+      const submitBtn = document.querySelector('[data-action="submit"]');
+      submitBtn.addEventListener("click", processFormData);
 
+      function processFormData(e) {
+        // 方法 1-1：getElementById - 從 input
+        const nameElement = document.getElementById("test");
+        const name = nameElement.value;
+        const emailElement = document.getElementById("myDate");
+        const email = emailElement.value;
+
+        alert("test是 " + name + "\nmyDate是 " + email);
       }
 
 
