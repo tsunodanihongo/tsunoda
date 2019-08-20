@@ -121,4 +121,5 @@ body, html {
   background-color: #283C82;
   border-color: #10c6d3;
 }
+#dialog { display: none; }
 </style>
