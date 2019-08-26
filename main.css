@@ -24,7 +24,7 @@ body, html {
   display: flow;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   text-align: center;
 }
 
@@ -110,16 +110,16 @@ body, html {
 }
 
 .btn.btn-warning:focus {
-  background-color: #283C82;
-  border-color: #10c6d3;
+  background-color: #A3C0D3;
+  border-color: #A3C0D3;
 },
 .btn.btn-warning:active {
   background-color: #283C82;
-  border-color: #10c6d3;
+  border-color: #283C82;
 },
 .btn.btn-warning:hover {
   background-color: #283C82;
-  border-color: #10c6d3;
+  border-color: #283C82;
 }
-#dialog { display: none; }
+
 </style>

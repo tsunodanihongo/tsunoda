@@ -50,13 +50,16 @@
         </div>
       </div>
 
-      <div id="dialog" title="請輸入補簽日期">
-        <input type="date" id="myDate" />
-        <input type='button' value='送出' onclick="submit()"/>
-     </div>
+
 
       <div id="container">
         <h1> <a>角田日語 刷卡系統</a> </h1>
+
+        <div id="reSignDateSelector" title="請輸入補簽日期">
+          <input type="hidden" id="myDate"/>
+          <input type='hidden' value='送出' onclick="submit()" id="myDateButton"/>
+        </div>
+
         <h1> <a><div id="show_resign_date"></div><a></h1>
       </div>
 
@@ -236,24 +239,36 @@
           });
       }
 
+
       function resign(){
+        var inputResiginDate = document.getElementById("myDate");
+        var inputResiginButton = document.getElementById("myDateButton");
+
         if(document.getElementById("show_resign_date").textContent == ""){
-          $('#dialog').dialog();
+        	inputResiginDate.type = "date";
+          inputResiginButton.type = "button";
 
         }else{
+        	inputResiginDate.type = "hidden";
+          inputResiginButton.type = "hidden";
           document.getElementById("show_resign_date").innerHTML = "";
           document.getElementById("resign_button").value = "補簽到";
         }
 
+
       }
+
       function submit(){
-        const resign_date = document.getElementById("myDate").value;
+        var inputResiginDate = document.getElementById("myDate");
+        var inputResiginButton = document.getElementById("myDateButton");
+        const resign_date = inputResiginDate.value;
 
         //比較輸入日期是否超過今日
         if(compareDate(new Date(), resign_date)){
           document.getElementById("show_resign_date").innerHTML = resign_date;
           document.getElementById("resign_button").value = "現在時間";
-          $('#dialog').dialog("close");
+          inputResiginDate.type = "hidden";
+          inputResiginButton.type = "hidden";
 
         }else{
           alert("已超過今日");
