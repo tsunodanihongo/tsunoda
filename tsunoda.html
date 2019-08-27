@@ -122,7 +122,7 @@
           var resignDate = document.getElementById("show_resign_date").textContent;
           if(resignDate != ""){
             date = resignDate;
-            time = dt.yyyymmdd() + " " + dt.HHMMss();
+            time = dt.yyyymmdd() + "_" + dt.HHMMss();
 
             dt = new Date(resignDate);
             year = dt.getFullYear();
@@ -140,7 +140,7 @@
           console.log("checkEmail:" + emailStr + "\n, index:" + student_qr[2] + ", sheetId:" + student_qr[1]
            + "\n, year:" + year + ", month:" + month + ", day:" + day + "\n, date:" + date + ", time:" + time);
 
-          jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec?url=https://tsunodanihongo.github.io/tsunoda/tsunoda.html", {
+          jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec?callback=?", {
                   "checkEmail": emailStr,
                   "index": student_qr[2],
                   "sheetId": student_qr[1],
@@ -156,9 +156,9 @@
               if(!data.includes(",") || data.includes("已刷卡")){
                 alert(data);
 
-                if(data.includes("已刷卡")){
-                  playSound("/tsunoda/pika.m4a");
-                }
+                // if(data.includes("已刷卡")){
+                //   playSound("/tsunoda/pika.m4a");
+                // }
 
               }else{
 
@@ -178,7 +178,7 @@
                   document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
                 }
 
-                playSound("BGM_signin");
+                //playSound("BGM_signin");
 
               }
           });
