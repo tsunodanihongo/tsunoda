@@ -53,7 +53,7 @@
 
         <div id="reSignDateSelector" title="請輸入補簽日期">
           <input type="hidden" id="myDate"/>
-          <input type='hidden' value='送出' onclick="submit()" id="myDateButton"/>
+          <input type='hidden' value='送出' onclick="reSignDateSubmit()" id="myDateButton"/>
         </div>
 
         <h1> <a><div id="show_resign_date"></div><a></h1>
@@ -63,6 +63,14 @@
       <div class="preview-container">
         <video id="preview"></video>
       </div>
+
+      <br>
+      <div class="signIn-container">
+        <input type="text" id="signInID"/>
+        <input type='button' value='確認' onclick="signIDSubmit()" id="signIDButton"/>
+      </div>
+
+
 
       <div class="student_info"  id="show_alert" data-toggle="tooltip" data-placement="top">
         <ul1><h2> 學號 </h2><li id="student_id"></li></ul1><ul2><h2> 姓名 </h2><li id="student_name"></li></ul2><ul2><h2> 日文名 </h2><li id="student_japan_name"></li></ul2><ul3><h2> 狀態 </h2><li id="student_status"></li></ul3>
@@ -89,7 +97,7 @@
           console.log(content);
           var student_qr = content.split(";");
           pauseVid();
-          getInfo(student_qr);
+          scanSubmit(student_qr);
       });
       function playVid()
       { document.getElementById('preview').play(); }
@@ -115,34 +123,71 @@
 
 
 
-      function getInfo(student_qr){
-          var dt = new Date();
-          var year, month, day, date, time;
 
-          var resignDate = document.getElementById("show_resign_date").textContent;
-          if(resignDate != ""){
-            date = resignDate;
-            time = dt.yyyymmdd() + "_" + dt.HHMMss();
 
-            dt = new Date(resignDate);
-            year = dt.getFullYear();
-            month = dt.getMonth()+1;
-            day = dt.getDate();
+      var year, month, day, date, time;
 
-          }else{
-            year = dt.getFullYear();
-            month = dt.getMonth()+1;
-            day = dt.getDate();
-            date = dt.yyyymmdd();
-            time = dt.HHMMss();
-          }
+      function setTime(){
+        var dt = new Date();
+        var resignDate = document.getElementById("show_resign_date").textContent;
+        if(resignDate != ""){
+          date = resignDate;
+          time = dt.yyyymmdd() + "_" + dt.HHMMss();
+
+          dt = new Date(resignDate);
+          year = dt.getFullYear();
+          month = dt.getMonth()+1;
+          day = dt.getDate();
+
+        }else{
+          year = dt.getFullYear();
+          month = dt.getMonth()+1;
+          day = dt.getDate();
+          date = dt.yyyymmdd();
+          time = dt.HHMMss();
+        }
+      }
+
+      function signIDSubmit(){
+        pauseVid();
+        setTime();
+        var student_input = document.getElementById("signInID").value;
+        var  id = "", name = "";
+
+        //如果是數字
+        if(!isNaN(student_input)){
+          id = student_input;
+        }else{
+          name = student_input;
+        }
+
+        console.log("checkEmail:" + emailStr + "\n, id:" + id +"\n, name:" + name +
+         "\n, year:" + year + ", month:" + month + ", day:" + day + "\n, date:" + date + ", time:" + time);
+
+        jQuery.get("https://script.google.com/macros/s/AKfycby_F5OIMv60wokleH1pJ6M7N6G2h1rEpv7UCI6SKW4AekS6518/exec", {
+                "checkEmail": emailStr,
+                "id": id,
+                "name": name,
+                "year": year,
+                "month": month,
+                "day": day,
+                "date": date,
+                "time": time
+        },function (data) {
+            showInfo(data);
+            document.getElementById("signInID").value = "";
+        });
+      }
+
+      function scanSubmit(student_qr){
+
+          setTime();
 
           console.log("checkEmail:" + emailStr + "\n, index:" + student_qr[2] + ", sheetId:" + student_qr[1]
            + "\n, year:" + year + ", month:" + month + ", day:" + day + "\n, date:" + date + ", time:" + time);
 
-
            //https://script.google.com/macros/s/AKfycbyh8xkrqPkiE2M4rqSLaOQnGzuBhlIM-2GwcB5tFBs/exec
-          jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec?callback=?", {
+          jQuery.get("https://script.google.com/macros/s/AKfycbxc51dfGOeLJfBD_mq_g48gaBjwlOKE9OA2fCRLsqNwB4_nHl0/exec", {
                   "checkEmail": emailStr,
                   "index": student_qr[2],
                   "sheetId": student_qr[1],
@@ -152,39 +197,46 @@
                   "date": date,
                   "time": time
           },function (data) {
-              playVid();
-              console.log(data);
-              //有錯誤
-              if(!data.includes(",") || data.includes("已刷卡")){
-                alert(data);
-
-                if(data.includes("已刷卡")){
-                  playSound("/tsunoda/pika.m4a");
-                }
-
-              }else{
-
-                var info_split = data.split(",");
-                document.getElementById("student_id").innerHTML = info_split[1];
-                document.getElementById("student_name").innerHTML = info_split[2];
-                document.getElementById("student_japan_name").innerHTML = info_split[3];
-                document.getElementById("student_status").innerHTML = info_split[5];
-
-                if(info_split[5] == "到期線上待繳"){
-                  document.getElementById("student_status").style.backgroundColor ='#FF0000';
-
-                }else if(info_split[5] == "延課中"){
-                 document.getElementById("student_status").style.backgroundColor ='#FFFF00';
-
-                }else{
-                  document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
-                }
-
-                playSound("BGM_signin");
-
-              }
+              showInfo(data);
           });
       }
+
+      function showInfo(data){
+        playVid();
+        console.log(data);
+        //有錯誤
+        if(!data.includes(",") || data.includes("已刷卡")){
+          alert(data);
+
+          if(data.includes("已刷卡")){
+            playSound("/tsunoda/pika.m4a");
+          }
+
+        }else{
+
+          var info_split = data.split(",");
+          document.getElementById("student_id").innerHTML = info_split[1];
+          document.getElementById("student_name").innerHTML = info_split[2];
+          document.getElementById("student_japan_name").innerHTML = info_split[3];
+          document.getElementById("student_status").innerHTML = info_split[5];
+
+          if(info_split[5] == "到期線上待繳"){
+            document.getElementById("student_status").style.backgroundColor ='#FF0000';
+
+          }else if(info_split[5] == "延課中"){
+           document.getElementById("student_status").style.backgroundColor ='#FFFF00';
+
+          }else{
+            document.getElementById("student_status").style.backgroundColor ='#FFF8DB';
+          }
+
+          playSound("BGM_signin");
+
+        }
+      }
+
+
+
 
       Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
@@ -256,7 +308,7 @@
 
       }
 
-      function submit(){
+      function reSignDateSubmit(){
         var inputResiginDate = document.getElementById("myDate");
         var inputResiginButton = document.getElementById("myDateButton");
         const resign_date = inputResiginDate.value;
