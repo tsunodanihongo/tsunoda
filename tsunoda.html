@@ -158,7 +158,8 @@
         if(!isNaN(student_input)){
           id = student_input;
         }else{
-          name = student_input;
+          document.getElementById("signInID").value = "";
+          return;
         }
 
         console.log("checkEmail:" + emailStr + "\n, id:" + id +"\n, name:" + name +
