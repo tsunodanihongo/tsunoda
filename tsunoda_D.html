@@ -97,7 +97,15 @@
           console.log(content);
           var student_qr = content.split(";");
           pauseVid();
-          scanSubmit(student_qr);
+
+          if(student_qr[3] == "D"){
+            scanSubmit(student_qr);
+
+          }else{
+            showInfo(content + " - 此 QR code 非開發用");
+            playVid();
+          }
+
       });
       function playVid()
       { document.getElementById('preview').play(); }
